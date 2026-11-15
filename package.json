@@ -1,0 +1,59 @@
+{
+  "name": "khe",
+  "version": "0.1.0",
+  "description": "khe, Harshit Khemani's design system.",
+  "license": "MIT",
+  "author": "Harshit Khemani (https://www.khe.money)",
+  "homepage": "https://www.khe.money",
+  "files": [
+    "src",
+    "tokens",
+    "khe.DESIGN",
+    "LICENSE",
+    "README.md"
+  ],
+  "dependencies": {
+    "@ui-sdk/core": "0.1.0-beta.2",
+    "@ui-sdk/react": "0.1.0-beta.1",
+    "motion": "^14.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rough-notation": "^0.5.1",
+    "skullet": "^0.0.3",
+    "torph": "^0.1.4",
+    "web-haptics": "^0.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "marked": "^18.2.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs && node scripts/build-design.mjs && node -e \"const f=require('fs');f.mkdirSync('site/public/downloads',{recursive:true});for(const [a,b] of [['tokens/tokens.json','tokens.json'],['src/styles/tokens.css','tokens.css'],['src/styles/khe.css','khe.css'],['src/styles/feel.css','feel.css'],['src/styles/verse-text.css','verse-text.css']])f.copyFileSync(a,'site/public/downloads/'+b)\"",
+    "dev": "npm run tokens && vite",
+    "build": "npm run tokens && vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check": "node scripts/check.mjs && tsc --noEmit -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HKTITAN/khe"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/styles/tokens.css",
+    "./khe.css": "./src/styles/khe.css",
+    "./tokens.json": "./tokens/tokens.json",
+    "./khe.DESIGN": "./khe.DESIGN"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist-site",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "dest": "/index.md",
+      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept" }
+    },
+    { "src": "/", "headers": { "Vary": "Accept" }, "continue": true },
+    { "src": "/index.md", "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept" }, "continue": true },
+    { "src": "/llms.txt", "headers": { "Content-Type": "text/plain; charset=utf-8" }, "continue": true },
+    { "handle": "filesystem" },
+    {
+      "src": "/.*",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "dest": "/404.md",
+      "status": 404,
+      "headers": { "Content-Type": "text/markdown; charset=utf-8", "Vary": "Accept" }
+    }
+  ]
+}

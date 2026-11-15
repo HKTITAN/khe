@@ -1,0 +1,231 @@
+/* VerseText styles by Rajat Sethi, copied unchanged from https://verse.rajatsethii.in (fetched 2026-11-15). */
+
+/*
+ * <VerseText />'s layers. Inks: --vt-ink, --vt-key, --vt-violet, --vt-magenta, --vt-green,
+ * --vt-gold, --vt-plate-c/m/y, --vt-dot-red; plus --vt-blend, --vt-leading, --vt-wrap.
+ */
+
+.vt-root {
+  color: var(--vt-ink, oklch(0.2 0 0));
+}
+
+/* tone="dark": light ink, plates screened; :where keeps it overridable */
+:where(.vt-root[data-tone='dark']) {
+  --vt-ink: oklch(0.955 0 0);
+  --vt-blend: screen;
+}
+
+/* unseen (still read aloud) until it prints; shown after 3 s if scripts never run */
+@media (scripting: enabled) {
+  .vt-root[data-phase='waiting'] .vt-sheet {
+    opacity: 0;
+    animation: vt-reveal 0s 3s forwards;
+  }
+}
+
+@keyframes vt-reveal {
+  to {
+    opacity: 1;
+  }
+}
+
+.vt-sheet {
+  position: relative;
+}
+
+.vt-prose {
+  margin: 0;
+  font-weight: 400;
+  line-height: var(--vt-leading, 1.62);
+  letter-spacing: -0.006em;
+  text-wrap: var(--vt-wrap, pretty);
+}
+
+/* a torn or split band, drawn again over the paragraph */
+.vt-prose[data-copy] {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.vt-prose[data-copy='plate'] {
+  mix-blend-mode: var(--vt-blend, multiply);
+}
+
+.vt-prose[data-copy='plate'] .vt-glitch {
+  display: none;
+}
+
+.vt-prose[data-plate='c'] {
+  color: var(--vt-plate-c, oklch(0.76 0.15 222));
+}
+
+.vt-prose[data-plate='m'] {
+  color: var(--vt-plate-m, oklch(0.6 0.26 355));
+}
+
+.vt-prose[data-plate='y'] {
+  color: var(--vt-plate-y, oklch(0.93 0.19 104));
+}
+
+/* ------------------------------------------------------------ a word */
+
+.vt-word {
+  /* the inks parts.tsx paints inline, resolved with the stylesheet's own colours */
+  --vt-paint-violet: var(--vt-violet, oklch(0.48 0.29 272));
+  --vt-paint-magenta: var(--vt-magenta, oklch(0.64 0.3 328));
+  --vt-paint-green: var(--vt-green, oklch(0.72 0.25 145));
+  --vt-paint-gold: var(--vt-gold, oklch(0.82 0.17 82));
+  --vt-paint-key: var(--vt-key, oklch(0.12 0 0));
+  --vt-paint-dot: var(--vt-dot-red, oklch(0.6 0.25 25));
+
+  position: relative;
+}
+
+.vt-word[data-state='waiting'],
+.vt-word[data-key='false'] {
+  color: transparent;
+}
+
+.vt-glitch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* copies over the word, line box centred on its own so the baselines meet */
+.vt-copy,
+.vt-plate,
+.vt-key-ink,
+.vt-comb-ink,
+.vt-shard-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  white-space: pre;
+}
+
+.vt-copy,
+.vt-plate {
+  mix-blend-mode: var(--vt-blend, multiply);
+}
+
+.vt-plate[data-plate='c'] {
+  color: var(--vt-plate-c, oklch(0.76 0.15 222));
+}
+
+.vt-plate[data-plate='m'] {
+  color: var(--vt-plate-m, oklch(0.6 0.26 355));
+}
+
+.vt-plate[data-plate='y'] {
+  color: var(--vt-plate-y, oklch(0.93 0.19 104));
+}
+
+/* the comb: the frame's inks once per slip, each masked to its strips; a layer
+   reaches 1em past the word and 0.75em above and below (parts.tsx COMB_REACH_Y) */
+.vt-comb {
+  position: absolute;
+  inset: -0.75em -1em;
+}
+
+.vt-comb-body {
+  position: absolute;
+  inset: 0.75em 1em;
+}
+
+.vt-key-ink {
+  color: var(--vt-ink, oklch(0.2 0 0));
+}
+
+.vt-comb-ink {
+  mix-blend-mode: var(--vt-blend, multiply);
+}
+
+.vt-comb-ink[data-tint='c'] {
+  color: var(--vt-plate-c, oklch(0.76 0.15 222));
+}
+
+.vt-comb-ink[data-tint='m'] {
+  color: var(--vt-plate-m, oklch(0.6 0.26 355));
+}
+
+/* the black behind the shards, showing in the gaps as they part */
+.vt-gap {
+  position: absolute;
+  inset: 0;
+  background-color: var(--vt-key, oklch(0.12 0 0));
+}
+
+/* a shard and its black edge, oversized (parts.tsx PAD_X, PAD_Y) so pushed pieces keep shape */
+.vt-rim,
+.vt-shard {
+  position: absolute;
+  inset: -30% -15%;
+}
+
+.vt-rim {
+  background-color: var(--vt-key, oklch(0.12 0 0));
+}
+
+.vt-shard {
+  background-color: var(--vt-shard);
+}
+
+.vt-shard[data-color='violet'] {
+  --vt-shard: var(--vt-violet, oklch(0.48 0.29 272));
+}
+
+.vt-shard[data-color='magenta'] {
+  --vt-shard: var(--vt-magenta, oklch(0.64 0.3 328));
+}
+
+.vt-shard[data-color='green'] {
+  --vt-shard: var(--vt-green, oklch(0.72 0.25 145));
+}
+
+.vt-shard[data-color='gold'] {
+  --vt-shard: var(--vt-gold, oklch(0.82 0.17 82));
+}
+
+/* a motion streak inside the shard, a darker tone of its colour */
+.vt-shard[data-streak='true'] {
+  background-image: repeating-linear-gradient(
+    var(--streak),
+    transparent 0 0.05em,
+    color-mix(in oklab, var(--vt-shard), black 28%) 0.05em 0.085em
+  );
+}
+
+/* the word's glyphs inside the shard, where the word stands */
+.vt-shard-text {
+  inset: 18.75% 11.538%;
+}
+
+.vt-shard[data-ink='light'] .vt-shard-text {
+  color: oklch(0.99 0 0);
+}
+
+.vt-shard[data-ink='dark'] .vt-shard-text {
+  color: var(--vt-key, oklch(0.12 0 0));
+}
+
+/* debris round a glitching word: dots, specks and torn ink */
+.vt-bit {
+  position: absolute;
+}
+
+.vt-bit[data-kind='dot'],
+.vt-bit[data-kind='speck'] {
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vt-root[data-phase='waiting'] .vt-sheet {
+    opacity: 1;
+    animation: none;
+  }
+}

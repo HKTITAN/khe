@@ -1,0 +1,258 @@
+$schema: https://raw.githubusercontent.com/AgentsORG/DESIGN/main/schema/design.v1.schema.json
+schema: design.v1
+name: khe
+version: 0.1.0
+status: draft
+updated_at: "2026-11-15"
+description: >
+  khe, Harshit Khemani's design system: quiet paper and ink, one sans, springs, and a yellow
+  highlighter. Used for khe.money, his papers, decks and posts.
+
+agent:
+  skill: design
+  instructions: |
+    You are holding khe's .DESIGN file (schema design.v1), written from tokens/tokens.json.
+    If kheSkills (npx skills add HKTITAN/skills) is installed, use it, and still treat THIS file as the truth.
+
+    READ
+    - Load this file before making or reviewing anything for khe or khe.money: pages,
+      components, papers, decks, posts, UI copy.
+    - Order: constraints -> tokens -> themes -> components -> voice -> assets.
+
+    FOLLOW
+    - Use the role tokens (themes.light / themes.dark), never a raw hex, size or easing.
+    - Paper and ink do the work. Yellow is a highlighter: it marks words, never fills a button.
+    - One typeface, Inter. Headings are Inter Black, uppercase, in the heading grey.
+      The khe mark is set in the heading face. Numbers, dates and file names are Geist Mono.
+      The hand font is for margin notes only, never body text.
+    - Everything that moves uses a spring token; reduced motion turns movement off.
+    - Components come from khe, which wraps ui-sdk. Never import ui-sdk directly in an app.
+    - Light is the default theme. Both themes must work.
+
+    DON'T
+    - No gradients, glows, coloured shadows, or a second accent colour.
+    - No invented copy, numbers or quotes in examples. Use real words or placeholder bars.
+    - Nothing overflows the viewport, at any width, even on hover.
+
+constraints:
+  - "Light theme is the default; dark must work everywhere."
+  - "Text meets 4.5:1 contrast; controls and focus rings 3:1."
+  - "Text selection is grey (selection token), not blue or yellow."
+  - "Section headings carry no numbers."
+  - "Every interactive part is keyboard reachable and named."
+
+tokens:
+  "color":
+    "sand":
+      "1": "#fdfdfc"
+      "2": "#f9f9f8"
+      "3": "#f1f0ef"
+      "4": "#e9e8e6"
+      "5": "#e2e1de"
+      "6": "#dad9d6"
+      "7": "#cfceca"
+      "8": "#bcbbb5"
+      "9": "#8d8d86"
+      "10": "#82827c"
+      "11": "#63635e"
+      "12": "#21201c"
+    "sand-dark":
+      "1": "#111110"
+      "2": "#191918"
+      "3": "#222221"
+      "4": "#2a2a28"
+      "5": "#31312e"
+      "6": "#3b3a37"
+      "7": "#494844"
+      "8": "#62605b"
+      "9": "#6f6d66"
+      "10": "#7c7b74"
+      "11": "#b5b3ad"
+      "12": "#eeeeec"
+    "white": "#ffffff"
+    "yellow": "oklch(0.92 0.16 98)"
+    "yellow-dark": "oklch(0.86 0.15 96)"
+    "blue": "oklch(0.62 0.17 255)"
+    "blue-dark": "oklch(0.74 0.13 255)"
+    "salmon": "oklch(0.72 0.14 32)"
+    "salmon-dark": "oklch(0.68 0.13 32)"
+    "gray":
+      "1": "#fcfcfc"
+      "2": "#f9f9f9"
+      "3": "#f0f0f0"
+      "4": "#e8e8e8"
+      "5": "#e0e0e0"
+      "6": "#d9d9d9"
+      "7": "#cecece"
+      "8": "#bbbbbb"
+      "9": "#8d8d8d"
+      "10": "#838383"
+      "11": "#646464"
+      "12": "#202020"
+    "gray-dark":
+      "1": "#111111"
+      "2": "#191919"
+      "3": "#222222"
+      "4": "#2a2a2a"
+      "5": "#313131"
+      "6": "#3a3a3a"
+      "7": "#484848"
+      "8": "#606060"
+      "9": "#6e6e6e"
+      "10": "#7b7b7b"
+      "11": "#b4b4b4"
+      "12": "#eeeeee"
+    "slate":
+      "1": "#fcfcfd"
+      "2": "#f9f9fb"
+      "3": "#f0f0f3"
+      "4": "#e8e8ec"
+      "5": "#e0e1e6"
+      "6": "#d9d9e0"
+      "7": "#cdced6"
+      "8": "#b9bbc6"
+      "9": "#8b8d98"
+      "10": "#80838d"
+      "11": "#60646c"
+      "12": "#1c2024"
+    "slate-dark":
+      "1": "#111113"
+      "2": "#18191b"
+      "3": "#212225"
+      "4": "#272a2d"
+      "5": "#2e3135"
+      "6": "#363a3f"
+      "7": "#43484e"
+      "8": "#5a6169"
+      "9": "#696e77"
+      "10": "#777b84"
+      "11": "#b0b4ba"
+      "12": "#edeef0"
+  "typeface":
+    "sans": "Inter, system-ui, sans-serif"
+    "mono": "\"Geist Mono\", ui-monospace, monospace"
+    "hand": "\"Nothing You Could Do\", \"Segoe Print\", cursive"
+  "size":
+    "12": "0.75rem"
+    "13": "0.8125rem"
+    "14": "0.875rem"
+    "16": "1rem"
+    "18": "1.125rem"
+    "22": "1.375rem"
+    "32": "2rem"
+  "radius":
+    "6": "6px"
+    "8": "8px"
+    "12": "12px"
+    "full": "999px"
+  "spring":
+    "smooth": { stiffness: 260, damping: 32 }
+    "snappy": { stiffness: 500, damping: 30 }
+    "bouncy": { stiffness: 380, damping: 16 }
+  "ease":
+    "snappy-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    "quick-out": "cubic-bezier(0, 0, 0.2, 1)"
+    "swift-out": "cubic-bezier(0.175, 0.885, 0.32, 1.1)"
+    "overshoot-out": "cubic-bezier(0.175, 0.885, 0.32, 1.275)"
+    "in-out-cubic": "cubic-bezier(0.645, 0.045, 0.355, 1)"
+
+themes:
+  light:
+    "bg-page": "{color.sand.1}"
+    "bg-surface": "{color.white}"
+    "bg-subtle": "{color.sand.2}"
+    "bg-hover": "{color.sand.3}"
+    "bg-inverse": "{color.sand.12}"
+    "border-subtle": "{color.sand.4}"
+    "border-strong": "{color.sand.6}"
+    "text-primary": "{color.sand.12}"
+    "text-secondary": "{color.sand.11}"
+    "text-tertiary": "{color.sand.10}"
+    "text-inverse": "{color.sand.1}"
+    "accent": "{color.sand.12}"
+    "accent-text": "{color.sand.1}"
+    "highlight": "{color.yellow}"
+    "focus-ring": "{color.sand.8}"
+    "guide": "{color.blue}"
+    "selection": "{color.sand.5}"
+    "strike": "{color.salmon}"
+    "heading-color": "{color.sand.9}"
+    "highlight-text": "{color.sand.12}"
+  dark:
+    "bg-page": "{color.sand-dark.1}"
+    "bg-surface": "{color.sand-dark.3}"
+    "bg-subtle": "{color.sand-dark.2}"
+    "bg-hover": "{color.sand-dark.4}"
+    "bg-inverse": "{color.sand-dark.12}"
+    "border-subtle": "{color.sand-dark.5}"
+    "border-strong": "{color.sand-dark.7}"
+    "text-primary": "{color.white}"
+    "text-secondary": "{color.sand-dark.12}"
+    "text-tertiary": "{color.sand-dark.11}"
+    "text-inverse": "{color.sand-dark.1}"
+    "accent": "{color.sand-dark.12}"
+    "accent-text": "{color.sand-dark.1}"
+    "highlight": "{color.yellow-dark}"
+    "focus-ring": "{color.sand-dark.8}"
+    "guide": "{color.blue-dark}"
+    "selection": "{color.sand-dark.6}"
+    "strike": "{color.salmon-dark}"
+    "heading-color": "{color.white}"
+    "highlight-text": "{color.sand-dark.1}"
+  any:
+    "font-body": "{typeface.sans}"
+    "font-display": "{typeface.sans}"
+    "font-mono": "{typeface.mono}"
+    "text-caption": "{size.13}"
+    "text-label": "{size.14}"
+    "text-body": "{size.16}"
+    "text-lead": "{size.18}"
+    "text-title": "{size.22}"
+    "text-display": "{size.32}"
+    "radius-badge": "{radius.6}"
+    "radius-control": "{radius.8}"
+    "radius-card": "{radius.12}"
+    "font-hand": "{typeface.hand}"
+    "motion-ease": "{spring.smooth.ease}"
+    "motion-duration": "{spring.smooth.duration}"
+    "motion-ease-snappy": "{spring.snappy.ease}"
+    "motion-duration-snappy": "{spring.snappy.duration}"
+    "motion-ease-bouncy": "{spring.bouncy.ease}"
+    "motion-duration-bouncy": "{spring.bouncy.duration}"
+    "font-heading": "{typeface.sans}"
+    "heading-weight": "900"
+    "heading-case": "uppercase"
+    "heading-tracking": "-0.01em"
+    "text-heading": "2.5rem"
+
+components:
+  Button: "variant: primary | secondary; size: sm | md; href renders a real link; async onClick shows pending"
+  Switch: "label names the setting"
+  SegmentedControl: "two to five options"
+  Tabs: "one panel at a time, sliding indicator"
+  Menu: "also the page's right-click menu"
+  Dialog: "one focused task"
+  Tooltip: "plain text only, never a button inside"
+  Checkbox: "label says what"
+  Slider: "label says what, value says how much"
+  CopyButton: "icon button, label rolls to Copied"
+  CommandPalette: "search pill, Cmd/Ctrl+K, jump, copy, download, actions"
+  ThemeToggle: "one switch; circle sweep from the click, interruptible"
+  VerseText: "for a name that should feel alive; inspired by Spider-Verse"
+
+voice:
+  - "Social posts and notes: lowercase, short lines, one idea per line."
+  - "Product text and docs: sentence case, just as short."
+  - "Open with a plain hook. Say what shipped, where to try it, and one detail of how it feels."
+  - "No hashtags, almost no emoji. Say agents, never AI agents."
+
+assets:
+  tokens_json: https://raw.githubusercontent.com/HKTITAN/khe/main/tokens/tokens.json
+  tokens_css: https://raw.githubusercontent.com/HKTITAN/khe/main/src/styles/tokens.css
+  khe_css: https://raw.githubusercontent.com/HKTITAN/khe/main/src/styles/khe.css
+  components: https://raw.githubusercontent.com/HKTITAN/khe/main/src/index.ts
+  logo: "Not drawn yet. Set 'khe' in the heading face (Inter Black, -0.04em) as a stand-in."
+
+provenance:
+  source: https://github.com/HKTITAN/khe
+  generated_by: scripts/build-design.mjs

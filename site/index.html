@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+  // Before first paint: mark that JavaScript runs (the agent text below is for crawlers that run none)
+  // and apply the saved theme, so neither flashes.
+  (function () {
+    var d = document.documentElement
+    d.classList.add("js")
+    try {
+      var q = new URLSearchParams(location.search).get("theme")
+      var t = q === "dark" || q === "light" ? q : localStorage.getItem("khe-theme")
+      if (t === "dark" || t === "light") d.setAttribute("data-theme", t)
+    } catch (e) {}
+  })()
+</script>
+<style>
+  .js .agent-text { display: none; }
+  html[data-theme="dark"] { background: oklch(0.18 0.003 90); color-scheme: dark; }
+</style>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>khe · Harshit Khemani's design system</title>
+<link rel="canonical" href="https://ds.khe.money/">
+<link rel="alternate" type="text/markdown" href="/index.md" title="khe as Markdown">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta name="keywords" content="khe, design system, design tokens, Harshit Khemani, khe.money, ui-sdk, khe.DESIGN">
+<!-- Open Graph, per ogp.me: the four basic properties, then the optional ones -->
+<meta property="og:title" content="khe · Harshit Khemani's design system">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ds.khe.money/">
+<meta property="og:image" content="https://ds.khe.money/og.png">
+<meta property="og:image:secure_url" content="https://ds.khe.money/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The khe brand page: How Harshit’s things look, read and move.">
+<meta property="og:description" content="How Harshit Khemani's things look, read and move: one set of colours, type, springs and parts, written once. Open source, MIT.">
+<meta property="og:site_name" content="khe">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="khe · Harshit Khemani's design system">
+<meta name="twitter:description" content="How Harshit Khemani's things look, read and move: one set of colours, type, springs and parts, written once.">
+<meta name="twitter:image" content="https://ds.khe.money/og.png">
+<meta name="twitter:image:alt" content="The khe brand page: How Harshit’s things look, read and move.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ds.khe.money/#website",
+      "name": "khe",
+      "alternateName": "khe design system",
+      "url": "https://ds.khe.money/",
+      "description": "Harshit Khemani's design system: colours, type, springs, components and khe.DESIGN for agents.",
+      "inLanguage": "en",
+      "keywords": "khe, design system, design tokens, khe.DESIGN",
+      "author": { "@id": "https://www.khe.money/#person" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "khe",
+      "description": "Design tokens, React components on ui-sdk, a brand page and khe.DESIGN for agents.",
+      "codeRepository": "https://github.com/HKTITAN/khe",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": ["TypeScript", "CSS"],
+      "url": "https://ds.khe.money/",
+      "author": { "@id": "https://www.khe.money/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.khe.money/#person",
+      "name": "Harshit Khemani",
+      "url": "https://www.khe.money",
+      "sameAs": ["https://github.com/HKTITAN"],
+      "knowsAbout": ["design systems", "design engineering", "product design"]
+    }
+  ]
+}
+</script>
+<meta name="theme-color" content="#fdfdfc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+<meta name="description" content="khe is Harshit Khemani's design system: how his things look, read and move. Colours, type, springs and components, written once in one file, with khe.DESIGN for agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Geist+Mono:wght@400;500&family=Inter:opsz,wght@14..32,400..900&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="root"><!--agent-content--></div>
+<script type="module" src="./main.tsx"></script>
+</body>
+</html>
